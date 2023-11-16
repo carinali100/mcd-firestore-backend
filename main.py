@@ -18,7 +18,7 @@ db = firestore.Client()
 def get_image_details(image_id):
     #get the image url and displayname
     doc_ref = db.collection("mcd-app-ui-skin").document("image"+image_id)
-    return flask.jsonify(url=doc_ref.get("url"), displayName=doc_ref.get("displayName"))
+    return flask.jsonify(url=doc_ref.get(field_paths={"url"}).get("url"), displayName=doc_ref.get(field_paths={"displayName"}).get("displayName"))
 
 
 @app.post("/setImage")
